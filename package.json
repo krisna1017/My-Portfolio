@@ -1,0 +1,29 @@
+{
+  "name": "my-portfolio",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Full-stack portfolio monorepo (Next.js + NestJS + Prisma)",
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -n BE,FE -c blue,green \"npm run start:dev --workspace apps/backend\" \"npm run dev --workspace apps/frontend\"",
+    "dev:be": "npm run start:dev --workspace apps/backend",
+    "dev:fe": "npm run dev --workspace apps/frontend",
+    "build": "npm run build --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "db:generate": "npm run db:generate --workspace apps/backend",
+    "db:migrate": "npm run db:migrate --workspace apps/backend",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}
