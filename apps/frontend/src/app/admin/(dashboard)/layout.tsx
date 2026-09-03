@@ -1,7 +1,6 @@
-import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
-import { apiFetch } from '@/lib/api';
-import { AdminNav } from '@/components/admin-nav';
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import { AdminNav } from "@/components/admin-nav";
 
 export default async function AdminLayout({
   children,
@@ -9,16 +8,28 @@ export default async function AdminLayout({
   children: React.ReactNode;
 }) {
   const cookieStore = await cookies();
-  const token = cookieStore.get('access_token')?.value;
+  const token = cookieStore.get("access_token")?.value;
 
-  if (!token) redirect('/admin/login');
+  if (!token) {
+    redirect("/admin/login");
+  }
 
-  try {
-    await apiFetch('/api/auth/me', {
-      headers: { Cookie: `access_token=${token}` },
-    });
-  } catch {
-    redirect('/admin/login');
+  const backendUrl = process.env.BACKEND_API_URL;
+
+  if (!backendUrl) {
+    throw new Error("BACKEND_API_URL is not configured");
+  }
+
+  const res = await fetch(`${backendUrl}/api/auth/me`, {
+    method: "GET",
+    headers: {
+      Cookie: `access_token=${token}`,
+    },
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    redirect("/admin/login");
   }
 
   return (
@@ -26,6 +37,7 @@ export default async function AdminLayout({
       <aside className="w-48 shrink-0">
         <AdminNav />
       </aside>
+
       <section className="flex-1">{children}</section>
     </div>
   );
