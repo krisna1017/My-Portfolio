@@ -1,37 +1,35 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { api, type AdminUser } from '@/lib/api';
-import { useAuthStore } from '@/store/auth';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { api, type AdminUser } from "@/lib/api";
+import { useAuthStore } from "@/store/auth";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function AdminLoginPage() {
   const router = useRouter();
   const setUser = useAuthStore((s) => s.setUser);
-  const [email, setEmail] = useState('admin@example.com');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("admin@example.com");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
-    setError('');
+    setError("");
     try {
-      const user = await api.post<AdminUser>('/api/auth/login', { email, password });
+      const user = await api.post<AdminUser>("/api/auth/login", {
+        email,
+        password,
+      });
       setUser(user);
-      router.push('/admin');
+      router.push("/admin");
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Login failed');
+      setError(err instanceof Error ? err.message : "Login failed");
     } finally {
       setLoading(false);
     }
@@ -66,7 +64,7 @@ export default function AdminLoginPage() {
               />
             </div>
             <Button type="submit" disabled={loading} className="w-full">
-              {loading ? 'Signing in…' : 'Sign In'}
+              {loading ? "Signing in…" : "Sign In"}
             </Button>
             {error && <p className="text-sm text-red-600">{error}</p>}
           </form>

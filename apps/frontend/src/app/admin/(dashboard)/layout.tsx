@@ -29,6 +29,14 @@ export default async function AdminLayout({
   });
 
   if (!res.ok) {
+    const errorText = await res.text();
+
+    console.error("AUTH ME FAILED:", {
+      status: res.status,
+      statusText: res.statusText,
+      body: errorText,
+    });
+
     redirect("/admin/login");
   }
 
