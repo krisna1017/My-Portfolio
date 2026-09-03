@@ -7,8 +7,12 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: resolve(import.meta.dirname, "..", ".."),
   },
+
   async rewrites() {
-    if (!backendUrl) return [];
+    if (!backendUrl) {
+      throw new Error("BACKEND_API_URL is not configured");
+    }
+
     return [
       {
         source: "/api/:path*",
