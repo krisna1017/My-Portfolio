@@ -1,29 +1,30 @@
-import type { Metadata } from 'next';
-import { Anton, Outfit, Geist_Mono } from 'next/font/google';
-import './globals.css';
-import { Navbar } from '@/components/navbar';
+import type { Metadata } from "next";
+import { Anton, Outfit, Geist_Mono } from "next/font/google";
+import "./globals.css";
+import { Navbar } from "@/components/navbar";
 
 const outfit = Outfit({
-  variable: '--font-outfit',
-  subsets: ['latin'],
-  display: 'swap',
+  variable: "--font-outfit",
+  subsets: ["latin"],
+  display: "swap",
 });
 
 const anton = Anton({
-  weight: '400',
-  variable: '--font-anton',
-  subsets: ['latin'],
-  display: 'swap',
+  weight: "400",
+  variable: "--font-anton",
+  subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: 'My Portfolio',
-  description: 'Personal portfolio built with Next.js, NestJS and Prisma',
+  title: "My Portfolio",
+  description:
+    "My Personal Portfolio Website include projects, skills, and contact information.",
 };
 
 export default function RootLayout({
