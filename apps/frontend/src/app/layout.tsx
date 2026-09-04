@@ -28,8 +28,15 @@ export const metadata: Metadata = {
   openGraph: {
     title: "My Portfolio",
     description:
-      "My Personal Portfolio Website include projects, skills, and contact information.",
-    images: ["/img-icon.png"],
+      "My Personal Portfolio Website includes projects, skills, and contact information.",
+    images: [
+      {
+        url: "/img-icon.png",
+        width: 1200,
+        height: 630,
+        alt: "My Portfolio",
+      },
+    ],
   },
 };
 
