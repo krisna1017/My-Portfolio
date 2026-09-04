@@ -25,6 +25,12 @@ export const metadata: Metadata = {
   title: "My Portfolio",
   description:
     "My Personal Portfolio Website include projects, skills, and contact information.",
+  openGraph: {
+    title: "My Portfolio",
+    description:
+      "My Personal Portfolio Website include projects, skills, and contact information.",
+    images: ["/img-icon.png"],
+  },
 };
 
 export default function RootLayout({
