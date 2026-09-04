@@ -28,12 +28,17 @@ export default async function AdminLayout({
     cache: "no-store",
   });
 
+  console.log("AUTH ME REQUEST:", {
+    url: `${backendUrl}/api/auth/me`,
+    hasToken: !!token,
+    status: res.status,
+  });
+
   if (!res.ok) {
     const errorText = await res.text();
 
     console.error("AUTH ME FAILED:", {
       status: res.status,
-      statusText: res.statusText,
       body: errorText,
     });
 
