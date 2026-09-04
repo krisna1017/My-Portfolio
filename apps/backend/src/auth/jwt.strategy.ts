@@ -11,6 +11,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         (req: any) => {
           const token = req?.cookies?.['access_token'];
 
+          console.log('=== JWT EXTRACTOR ===');
           console.log('COOKIE TOKEN EXISTS:', !!token);
 
           return token ?? null;
@@ -19,9 +20,13 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       ignoreExpiration: false,
       secretOrKey: process.env.JWT_SECRET,
     });
+
+    console.log('=== JWT STRATEGY INITIALIZED ===');
+    console.log('JWT SECRET EXISTS:', !!process.env.JWT_SECRET);
   }
 
   async validate(payload: { sub: string; email: string }) {
+    console.log('=== JWT VALIDATE ===');
     console.log('JWT PAYLOAD:', payload);
 
     const user = await this.prisma.user.findUnique({
